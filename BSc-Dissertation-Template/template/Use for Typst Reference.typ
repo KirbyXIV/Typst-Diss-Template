@@ -7,9 +7,7 @@ This document is a project report template for the School of Computer Science at
 
 This document has been generated using Typst, a modern typesetting system. The following subsections of this chapter demonstrate some basic Typst commands and formatting features. If you would prefer to use the supplied Word template, then you should aim to replicate the formatting shown here.
 
-== Motivation
-og
-
+== Subheading
 
 === Sub-subheading
 
@@ -52,6 +50,6 @@ Also, a table can be found in @tab:SampleTableCaption.
 
 == Referencing
 
-The included Harvard citation style file means that referencing will follow a Harvard style. You can cite references inline using the `@citekey` syntax. For example, here is a citation. You can also reference conference papers and books.
+The included Harvard citation style file means that referencing will follow a Harvard style. You can cite references inline using the `@citekey` syntax. For example, here is a citation @exampleArticle2024. You can also reference conference papers @exampleConference2023 and books @exampleBook2022.
 
 It is worth noting that the University of Lincoln's standard for referencing is Harvard, so you will not need to change this option. However, please double and triple check this to make sure you are using the correct referencing style. Also, ask your supervisor if you are unsure. This template uses a BibTeX (`.bib`) file for referencing. It is recommended to use a reference manager such as Zotero to export your references as a `.bib` file.

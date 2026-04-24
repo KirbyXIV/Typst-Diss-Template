@@ -1,3 +1,5 @@
+#import "@preview/wordometer:0.1.4": total-words, word-count
+
 #let MainPageSettings(doc) = {
 
   // CONFIGURATION VARIABLES
@@ -158,5 +160,9 @@
 
   // RENDER DOCUMENT
 
-  doc
+  word-count(total => {
+    doc
+    linebreak()
+    [_(#total.words words)_]
+  }, exclude: (heading, strike))  
 }
