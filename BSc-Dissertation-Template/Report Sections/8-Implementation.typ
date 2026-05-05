@@ -7,7 +7,14 @@ This chapter details the technical implementation of the digital assistance arti
 
 == System Architecture and Dual-Display Initialisation
 
-The foundational requirement of this artefact was the ability to separate public and private information across two screens without running two separate instances of the software.
+To satisfy the functional requirements established above, the artefict was designed around a centralised, dual-display architecture. Rather than relying on networked web applications, which often introduce latency and require complex synchronisation between separate browser windows, the system leverages the Unity Engine's native multi-camera rendering pipeline. This allows a single, locally executed application to process Game Master inputs, such as triggering spatial measurements (FR3) or selecting visual assets (FR2), and route the appropriate graphical outputs to two separate physical displays simultaneously.
+
+By centralising the logic within Unity, the system ensures that the private GM dashboard and the public player-facing screen remain entirely decoupled in their UI presentation, yet perfectly synchronised in real-time. The architectural diagram below illustrates this core data flow, detailing how user inputs are processed by the spatial and asset engines before being pushed to the hardware displays.
+
+#figure(
+  image("../../Images/ArchitectureFlow.png", width: 90%),
+  caption: [System architecture diagram illustrating the routing of Game Master inputs through the Unity rendering pipeline, demonstrating the decoupling of the private dashboard and the shared secondary display.]
+)
 
 === Display Activation
 
@@ -15,7 +22,14 @@ To initiate this, a lightweight `DisplayManager` script was implemented. Upon th
 
 === Layer Culling and Camera Separation
 
-Once the second display is active, the separation of information is handled via Unity's Layer Mask system and Camera Culling. Two distinct virtual cameras are utilised: the GM Camera (rendering to Display 1) and the Player Camera (rendering to Display 2). To manage what players can see, GameObjects are dynamically assigned to specific layers, notably `TokensPublic` and `TokensHidden`. If a monster token is assigned to `TokensHidden`, it is culled from the Player Camera's rendering pipeline but remains visible on the GM's dashboard. This technical approach effectively replicates the physical "Game Master Screen," allowing the GM to prepare encounters in secret without breaking the players' narrative immersion.
+Once the second display is active, the separation of information is handled via Unity's Layer Mask system and Camera Culling. Two distinct virtual cameras are utilised: the GM Camera (rendering to Display 1) and the Player Camera (rendering to Display 2). To manage what players can see, GameObjects are dynamically assigned to specific layers, notably `TokensPublic` and `TokensHidden`. If a monster token is assigned to `TokensHidden`, it is culled from the Player Camera's rendering pipeline but remains visible on the GM's dashboard. Similarly, this dual-camera setup manages the system's 'Fog of War' mechanic. The fog overlays are rendered with partial transparency on the GM Camera, allowing the Game Master to see the entire map layout and hidden entities beneath. Conversely, the Player Camera renders these same fog elements as completely opaque, hiding unexplored areas from the table. This technical approach effectively replicates the physical "Game Master Screen," allowing the GM to prepare encounters in secret without breaking the players' narrative immersion.
+
+#figure(
+  image("../../Images/DMView.png", width: 80%),
+  caption: [DM View])
+  #figure(
+  image("../../Images/PlayerView.png", width: 80%),
+  caption: [DM View])
 
 == Viewport Navigation
 

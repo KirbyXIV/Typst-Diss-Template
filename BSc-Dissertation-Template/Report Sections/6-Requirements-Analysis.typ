@@ -4,6 +4,10 @@
 = Requirements Analysis
 
 The literature review established that digital assistance in Tabletop Role-Playing Games (TTRPGs) must carefully balance the reduction of extraneous cognitive load with the preservation of imaginative immersion and social presence. To investigate this balance empirically, an artifact must be developed and evaluated. During the initial planning phases, it was determined that attempting to replicate complex character management systems would be redundant given the widespread adoption of robust platforms like D&D Beyond. Therefore, this project scopes its technical development to focus strictly on the shared physical space of the tabletop. This chapter outlines the target use case, details the functional and non-functional requirements for a Unity-based dual-display assistance and logging tool, specifies the environment, and establishes the evaluation methodology.
+#figure(
+  image("../../Images/DnDBeyond.png", width: 80%),
+  caption: [A brief snippet of a D&D Beyond Character Sheet]
+)
 
 == Target Audience and Use Case
 === User Personas and Cognitive Profiles
