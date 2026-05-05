@@ -1,3 +1,4 @@
+
 #import "../template/layout-template.typ" as layout
 #import "@preview/codelst:2.0.2": sourcecode
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
@@ -5,55 +6,80 @@
 
 #show: doc => layout.MainPageSettings(doc)
 
+#set heading(numbering: none)
 = Appendices
 
-This section is for any supplementary content that does not fit easily within the main dissertation. Examples include software documentation, user guides, large figures, logs of supervisor meetings, etc. This will not be marked directly but may be used to contextualise the main body of work.
+== Appendix A - Code Extracts
+#figure(sourcecode[```Cs
+private void HandleDropAndSnap()
+{
+    isDragging = false; 
+    if (selectedToken == null) return;
 
-== Appendix A: Code Snippets with Codelst
+    Vector3 pos = selectedToken.transform.position;
+    pos.x = Mathf.Floor(pos.x / gridSize) * gridSize + gridOffset.x;
+    pos.z = Mathf.Floor(pos.z / gridSize) * gridSize + gridOffset.y;
+    pos.y = 0.05f;
+    selectedToken.transform.position = pos;
+    DeselectToken();
+}
+```], caption: "A short extract of the code that was used to snap tokens to the grid")<Code:SnapTokens>
 
-Here you can see a short snippet of code that was used to implement a simple Python sorting algorithm. The Codelst package provides syntax highlighting for code blocks:
+#figure(sourcecode[```Cs
+    private void UpdateDrawing()
+    {
+        Ray ray = dmCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, mapLayer))
+        {
+            Vector3 mousePos = hit.point;
+            mousePos.y = 0.1f;
+            
+            float rawDistance = Vector3.Distance(centerPos, mousePos);
 
-#sourcecode[```python
-def bubble_sort(array):
-    n = len(array)
+            int squares = Mathf.Max(1, Mathf.RoundToInt(rawDistance / gridSize));
+            float snappedRadius = squares * gridSize;
+            float feet = squares * feetPerSquare;
 
-    for i in range(n):
+            currentAoE.transform.position = centerPos;
+            float diameter = snappedRadius * 2f;
+            
+            if (visualTransform != null) 
+            {
+                visualTransform.localPosition = Vector3.zero;
+                visualTransform.localScale = new Vector3(diameter, 0.1f, diameter);
+            }
+            else 
+            {
+                currentAoE.transform.localScale = new Vector3(diameter, 0.1f, diameter);
+            }
 
-        already_sorted = True
+            if (aoeText != null)
+            {
+                aoeText.text = feet + " ft Radius";
+                if (visualTransform == null) aoeText.transform.localScale = new Vector3(1f / diameter, 10f, 1f / diameter);
 
-        for j in range(n - i - 1):
-            if array[j] > array[j + 1]:
+                aoeText.transform.position = centerPos + new Vector3(0, 0.2f, 0);
+                aoeText.transform.rotation = dmCamera.transform.rotation;
+            }
+        }
+    }
+```], caption: "An extract of the code that was used for the Radial Measurements (AoE")<Code:AoEController>
 
-                array[j], array[j + 1] = array[j + 1], array[j]
-
-                already_sorted = False
-
-        if already_sorted:
-            break
-    return array
-```]
-
-#pagebreak()
-
-== Appendix B: Flowcharts with Fletcher
-
-This uses the Fletcher package to create a flowchart. The package is available at: https://typst.app/universe/package/fletcher/
-
-#diagram(
-  node-stroke: 1pt,
-  node((0, 0), [Start], corner-radius: 2pt, extrude: (0, 3)),
-  edge("-|>"),
-  node(
-    (0, 1),
-    align(center)[
-      Is the data\ valid?
-    ],
-    shape: diamond,
-  ),
-  edge("r", "-|>", [No]),
-  node((1, 1), [Handle Error], corner-radius: 2pt),
-  edge((0, 1), (0, 2), "-|>", [Yes]),
-  node((0, 2), [Process Data], corner-radius: 2pt),
-  edge("-|>"),
-  node((0, 3), [End], corner-radius: 2pt, extrude: (0, 3)),
-)
+#figure(sourcecode[```Cs
+private bool IsMouseOverUI()
+{
+    if (EventSystem.current == null) return false;
+    PointerEventData eventData = new PointerEventData(EventSystem.current);
+    eventData.position = Mouse.current.position.ReadValue();
+    List<RaycastResult> results = new List<RaycastResult>();
+    EventSystem.current.RaycastAll(eventData, results);
+    
+    foreach (RaycastResult result in results)
+    {
+        if (result.gameObject.GetComponentInParent
+        <UnityEngine.UI.Button>() != null) 
+            return true;
+    }
+    return false;
+}
+```], caption: "A short extract of the code that was used to provide a robust UI safeguard")<Code:IsMouseOverUI>

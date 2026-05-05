@@ -6,11 +6,11 @@
 #v(1fr)
 
 // Title
-#text(24pt, weight: "bold")[
-  [Insert Project Title Here]
-]
+#text(20pt, weight: "bold")[
+  Does Digital Assistance Deepen or Disrupt Player Experience in
+  Virtual Tabletop Role-Playing Games?]
 
-#v(1.5cm)
+#v(1cm)
 
 // University branding
 #image("../Images/uni_crest.jpg", width: 60%)
@@ -19,34 +19,34 @@
 
 // Author information
 #text(12pt)[
-  [Insert Full Name Here] \
-  [Insert Student ID Here]
+  Logan Kirby \
+  27450556
 ]
 
 #v(0.45cm)
 
 // Contact
 #text(12pt)[
-  StudentID\@students.lincoln.ac.uk
+  27450556\@students.lincoln.ac.uk
 ]
 
 #v(0.45cm)
 
 // Institution details
 #text(12pt)[
-  School of [School Name] \
+  School of Engineering and Physical Sciences \
   #v(0.25cm)
-  College of [College Name] \
+  College of Health and Science \
   #v(0.25cm)
   University of Lincoln
 ]
 
-#v(1.5cm)
+#v(1cm)
 
 // Submission statement
 #block(width: 85%)[
   #text(12pt)[
-    Submitted in partial fulfilment of the requirements for the Degree of [Your Degree Programme e.g. Bachelor of Science with Honours in Computer Science]
+    Submitted in partial fulfilment of the requirements for the Degree of Bachelor of Science with Honours in Games Computing
   ]
 ]
 
@@ -54,14 +54,14 @@
 
 // Supervisor
 #text(12pt)[
-  Supervisor: [Insert Supervisor Name Here]
+  Supervisor: Themis Papaioannou
 ]
 
-#v(1cm)
+#v(0.5cm)
 
 // Submission date
 #text(12pt)[
-  [Month Year]
+  May 2026
 ]
 
 #v(1fr)

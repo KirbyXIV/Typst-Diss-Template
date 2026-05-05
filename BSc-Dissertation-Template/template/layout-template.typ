@@ -1,4 +1,4 @@
-#import "@preview/wordometer:0.1.4": total-words, word-count
+// #import "@preview/wordometer:0.1.4": total-words, word-count
 
 #let MainPageSettings(doc) = {
 
@@ -134,7 +134,7 @@
 
   set figure.caption(separator: [. ])
   show figure.caption: it => context {
-    [#it.supplement#it.counter.display(it.numbering)#it.separator#it.body]
+    [#it.supplement #it.counter.display(it.numbering)#it.separator#it.body]
   }
 
   // Table captions above the table
@@ -160,9 +160,11 @@
 
   // RENDER DOCUMENT
 
-  word-count(total => {
-    doc
-    linebreak()
-    [_(#total.words words)_]
-  }, exclude: (heading, strike))  
+  //word-count(total => {
+  //  doc
+  //  linebreak()
+  //  [_(#total.words words)_]
+  //}, exclude: (heading, strike))  
+
+  doc
 }
